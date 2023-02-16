@@ -1,0 +1,40 @@
+﻿@model List<UserFile>
+
+@{
+    ViewData["Title"] = "Files";
+}
+
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>FileName</th>
+        <th>AddedDate</th>
+        <th>CreatedDate</th>
+        <th>FileStatus</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.FileName</td>
+                <td>@item.AddedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@item.GetCreatedDate</td>
+                <td>
+                        @if (@item.FileStatus == FileStatus.Existed)
+                        {
+                            <a href="@(item.PublicPath)">Download</a>
+                        }
+                        else
+                        {
+                            <span>Waiting...</span>
+                        }
+                </td>
+            </tr>              
+        }
+    </tbody>
+  </table>
+</div>
+
